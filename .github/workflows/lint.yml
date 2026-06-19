@@ -1,0 +1,26 @@
+name: Verilator Lint
+
+on:
+  push:
+
+jobs:
+  lint:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - uses: actions/checkout@v4
+
+      - name: Run Custom Action
+        id: lint
+
+        uses: DK-A/verilator-lint-action@v1
+
+        with:
+          files: "rtl/full_adder.sv"
+          severity: warning
+
+      - name: Show Result
+        run: |
+          echo '${{ steps.lint.outputs.result }}'
